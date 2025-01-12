@@ -1884,9 +1884,10 @@ ul li {
 
 ul li::before {
     content: '✧';
+    color: var(--primary-color);
     position: absolute;
     right: -1.5rem;
-    color: var(--primary-color);
+    top: 0;
 }
 
 .conclusion {
@@ -2558,4 +2559,12 @@ ul li::before {
 
 .info-section:hover::before {
     opacity: 1;
+}
+
+.small-icon {
+    font-size: 0.8em;
+}
+
+.facebook-link-card .small-icon {
+    font-size: 1.5em;
 }
