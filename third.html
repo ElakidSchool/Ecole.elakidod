@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نتائج الفصل الثالث</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Amiri', serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      min-height: 100vh;
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/dark-mosaic.png');
+      opacity: 0.1;
+      z-index: -1;
+      pointer-events: none;
+    }
+    .header {
+      padding: 30px 10px 15px;
+      font-size: 2.8rem;
+      color: #ffd700;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+      animation: glow 2s ease-in-out infinite;
+      background: linear-gradient(90deg, rgba(106, 17, 203, 0.3) 0%, rgba(37, 117, 252, 0.3) 100%);
+      margin-bottom: 20px;
+      border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+      padding-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    .section-title {
+      margin: 40px 0 25px;
+      font-size: 2.5rem;
+      color: #ff9e80;
+      text-shadow: 0 0 10px rgba(255, 158, 128, 0.6);
+      position: relative;
+      display: inline-block;
+      padding: 0 20px;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 25%;
+      width: 50%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #ff9e80, transparent);
+    }
+    .class-title {
+      font-size: 2rem;
+      margin-top: 30px;
+      color: #98fb98;
+      text-shadow: 0 0 10px rgba(144, 238, 144, 0.7);
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+    .result-item {
+      background: linear-gradient(90deg, rgba(106, 17, 203, 0.2) 0%, rgba(37, 117, 252, 0.2) 100%);
+      margin: 15px auto;
+      padding: 15px;
+      width: 85%;
+      max-width: 700px;
+      border-radius: 15px;
+      font-size: 1.6rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: fadeIn 1.2s forwards;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .result-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: 0.5s;
+    }
+    
+    .result-item:hover::before {
+      left: 100%;
+    }
+    .result-item:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .result-item i {
+      color: #ffd700;
+    }
+    .top-ten {
+      margin-top: 60px;
+    }
+    .quote {
+      background: linear-gradient(90deg, rgba(255, 193, 7, 0.15) 0%, rgba(255, 152, 0, 0.15) 100%);
+      margin: 25px auto;
+      padding: 18px;
+      width: 80%;
+      max-width: 700px;
+      border-radius: 12px;
+      font-size: 1.6rem;
+      color: #fff9c4;
+      border-right: 4px solid #ffa000;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-style: italic;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .quote:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .credit {
+      margin-top: 60px;
+      font-size: 1.8rem;
+      color: #ffd700;
+      text-shadow: 0 0 10px #fff8dc;
+    }
+    @keyframes glow {
+      0% { 
+        text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+      }
+      50% { 
+        text-shadow: 0 0 15px #ffd700, 0 0 30px #ffd700;
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+      }
+      100% { 
+        text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+      }
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" style="position: fixed; top: 20px; left: 20px; z-index: 1000; background: rgba(0,0,0,0.7); color: white; padding: 10px 15px; border-radius: 5px; text-decoration: none; display: flex; align-items: center; gap: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(0,0,0,0.9)'" onmouseout="this.style.background='rgba(0,0,0,0.7)'">
+    <i class="fas fa-arrow-right"></i>
+    العودة للرئيسية
+  </a>
+  <audio id="bg-audio" loop>
+    <source src="2026.mp3" type="audio/mpeg">
+    متصفحك لا يدعم تشغيل الصوت.
+  </audio>
+  
+  <div id="audio-controls" style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; background: rgba(106, 17, 203, 0.7); padding: 12px; border-radius: 50%; cursor: pointer; box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); transition: all 0.3s ease;">
+    <i id="audio-icon" class="fas fa-volume-up" style="font-size: 24px; color: #fff;"></i>
+  </div>
+  
+  <div id="floating-stars" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1;"></div>
+
+  <div class="header">
+    <i class="fas fa-school"></i> مدرسة العقيد لطفي – نتائج الفصل الثالث
+  </div>
+
+  <div class="section-title">المعدلات حسب الأقسام</div>
+
+  <div id="results"></div>
+
+  <div class="credit">برمجة الأستاذ ديقش كمال <i class="fas fa-laptop-code"></i></div>
+
+  <script>
+    const data = {
+      "السنة الأولى 1": [["لعواد فاطمة الزهراء", 9.58], ["شريف بلقاسم", 9.50], ["قاسم راحيل", 9.15]],
+      "السنة الأولى 2": [["توبي هاجر", 9.69], ["مرغاد براءة منية الله", 9.69], ["جنيدي أحمد", 9.65], ["بن بوزيد عبد الجواد", 9.60]],
+      "السنة الثانية 1": [["شنيط محمد سراج", 9.46], ["العمري عبد الرؤوف", 9.42], ["زنودة مهدي المختار", 9.25]],
+      "السنة الثانية 2": [["شماح زين الدين", 9.73], ["عبد العزيز لجين", 9.71], ["العمري دعاء نور اليقين", 9.69]],
+      "السنة الثالثة 1": [["ساكر مروة", 9.53], ["ضحوي هديل", 9.48], ["كشيدة عبد العزيز", 9.43]],
+      "السنة الثالثة 2": [["خضراوي شعيب ياسين", 9.69], ["كربوع إخلاص", 9.50], ["ضحوي أسيل مسعودة", 9.43]],
+      "السنة الثالثة 3": [["دهان محمد ريان", 9.73], ["بن محياوي فاطمة", 9.64], ["جنيدي غفران", 9.63]],
+      "السنة الرابعة 1": [["عزري يعقوب", 9.73], ["زنودة سارة", 9.60], ["دهان عبد الودود", 9.52]],
+      "السنة الرابعة 2": [["لقويرح أحمد صهيب", 9.84], ["غيبوب أيوب", 9.66], ["حاشي سيرين", 9.64]],
+      "السنة الخامسة 1": [["توبي عبد الله", 9.83], ["قوادرية عبد الغني", 9.82], ["شرون ندى", 9.75]],
+      "السنة الخامسة 2": [["شماح ميار", 9.73], ["كشيدة رزان", 9.68], ["زنودة لينا", 9.64]]
+    };
+
+    const topTen = [
+      ["المرتبة 1: لقويرح أحمد صهيب (رابعة 2)", 9.84],
+      ["المرتبة 2: توبي عبد الله (خامسة 1)", 9.83],
+      ["المرتبة 3: قوادرية عبد الغني (خامسة 1)", 9.82],
+      ["المرتبة 4: شرون ندى (خامسة 1)", 9.75],
+      ["المرتبة 5: دهان محمد ريان (ثالثة 3)", 9.73],
+      ["المرتبة 5: شماح زين الدين (ثانية 2)", 9.73],
+      ["المرتبة 5: شماح ميار (خامسة 2)", 9.73],
+      ["المرتبة 5: عزري يعقوب (رابعة 1)", 9.73],
+      ["المرتبة 5: ساكر مروة (ثالثة 1)", 9.73],
+      ["المرتبة 6: عبد العزيز لجين (ثانية 2)", 9.71],
+      ["المرتبة 7: توبي هاجر (أولى 2)", 9.69],
+      ["المرتبة 7: مرغاد براءة منية الله (أولى 2)", 9.69],
+      ["المرتبة 7: خضراوي شعيب ياسين (ثالثة 2)", 9.69],
+      ["المرتبة 8: جنيدي أحمد (أولى 2)", 9.65],
+      ["المرتبة 8: بن محياوي فاطمة (ثالثة 3)", 9.64],
+      ["المرتبة 8: حاشي سيرين (رابعة 2)", 9.64],
+      ["المرتبة 8: زنودة لينا (خامسة 2)", 9.64],
+      ["المرتبة 9: بن بوزيد عبد الجواد (أولى 2)", 9.60],
+      ["المرتبة 9: زنودة سارة (رابعة 1)", 9.60],
+      ["المرتبة 10: دهان عبد الودود (رابعة 1)", 9.52]
+    ];
+
+    function displayResults() {
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = '';
+      let delay = 800;
+
+      for (let [className, students] of Object.entries(data)) {
+        const classDiv = document.createElement('div');
+        classDiv.className = 'class-title';
+        classDiv.textContent = className;
+        classDiv.style.animationDelay = `${delay}ms`;
+        resultsDiv.appendChild(classDiv);
+        setTimeout(() => classDiv.scrollIntoView({ behavior: 'smooth', block: 'center' }), delay);
+        delay += 1200;
+
+        for (let [name, avg] of students) {
+          const div = document.createElement('div');
+          div.className = 'result-item';
+          div.innerHTML = `<i class='fas fa-user-graduate'></i> ${name} - ${avg}`;
+          div.style.animationDelay = `${delay}ms`;
+          resultsDiv.appendChild(div);
+          setTimeout(() => div.scrollIntoView({ behavior: 'smooth', block: 'center' }), delay);
+          delay += 1200;
+        }
+      }
+
+      const topTitle = document.createElement('div');
+      topTitle.className = 'section-title top-ten';
+      topTitle.textContent = 'أعلى 10 معدلات في المؤسسة';
+      topTitle.style.animationDelay = `${delay}ms`;
+      resultsDiv.appendChild(topTitle);
+      setTimeout(() => topTitle.scrollIntoView({ behavior: 'smooth', block: 'center' }), delay);
+      delay += 1200;
+
+      for (let [name, avg] of topTen) {
+        const div = document.createElement('div');
+        div.className = 'result-item';
+        div.innerHTML = `<i class='fas fa-crown'></i> ${name} - ${avg}`;
+        div.style.animationDelay = `${delay}ms`;
+        resultsDiv.appendChild(div);
+        setTimeout(() => div.scrollIntoView({ behavior: 'smooth', block: 'center' }), delay);
+        delay += 1200;
+      }
+
+      setTimeout(() => {
+        const q1 = document.createElement('div');
+        q1.className = 'quote';
+        q1.textContent = '"من جد وجد ومن زرع حصد، أنتم فخر مؤسستكم."';
+        resultsDiv.appendChild(q1);
+
+        const q2 = document.createElement('div');
+        q2.className = 'quote';
+        q2.textContent = '"النتائج ليست نهاية الطريق بل بدايته. القادم أفضل بإذن الله!"';
+        resultsDiv.appendChild(q2);
+
+        q2.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setTimeout(displayResults, 2000);
+        }, 5000);
+      }, delay);
+    }
+
+    // دالة بدء الصوت
+    function startAudio() {
+      const audio = document.getElementById('bg-audio');
+      const audioPromise = audio.play();
+      
+      if (audioPromise !== undefined) {
+        audioPromise.catch(error => {
+          // إظهار زر التشغيل في حالة الخطأ
+          document.getElementById('audio-controls').style.display = 'block';
+        });
+      }
+    }
+    
+    // التحكم في الصوت
+    document.getElementById('audio-controls').addEventListener('click', function() {
+      const audio = document.getElementById('bg-audio');
+      const icon = document.getElementById('audio-icon');
+      
+      if (audio.paused) {
+        audio.play();
+        icon.className = 'fas fa-volume-up';
+        this.style.background = 'rgba(106, 17, 203, 0.7)';
+      } else {
+        audio.pause();
+        icon.className = 'fas fa-volume-mute';
+        this.style.background = 'rgba(255, 0, 0, 0.7)';
+      }
+    });
+    
+    // إنشاء نجوم متحركة
+    function createFloatingStars() {
+      const starsContainer = document.getElementById('floating-stars');
+      const starCount = 20;
+      
+      for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.innerHTML = '★';
+        star.style.position = 'absolute';
+        star.style.color = ['#ffd700', '#ff9e80', '#80deea', '#ce93d8', '#a5d6a7'][Math.floor(Math.random() * 5)];
+        star.style.fontSize = `${Math.random() * 20 + 10}px`;
+        star.style.opacity = Math.random() * 0.5 + 0.2;
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.animation = `float ${Math.random() * 3 + 3}s ease-in-out infinite`;
+        star.style.animationDelay = `${Math.random() * 3}s`;
+        starsContainer.appendChild(star);
+      }
+    }
+    
+    // بدء عرض النتائج وتشغيل الصوت عند تحميل الصفحة
+    window.onload = function() {
+      displayResults();
+      createFloatingStars();
+      // محاولة تشغيل الصوت بعد تأخير بسيط
+      setTimeout(startAudio, 1000);
+      
+      // إضافة تأثيرات إضافية للعناصر
+      document.querySelectorAll('.result-item').forEach((item, index) => {
+        item.style.transition = 'all 0.3s ease';
+        item.style.cursor = 'pointer';
+        item.onmouseover = () => item.style.transform = 'scale(1.02)';
+        item.onmouseout = () => item.style.transform = 'scale(1)';
+      });
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المعدل السنوي</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Amiri', serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      min-height: 100vh;
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/dark-mosaic.png');
+      opacity: 0.1;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .header {
+      padding: 30px 10px 15px;
+      font-size: 2.8rem;
+      color: #ffd700;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+      animation: glow 2s ease-in-out infinite;
+      background: rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+      border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+      padding-bottom: 20px;
+    }
+
+    .section-title {
+      margin: 40px 0 20px;
+      font-size: 2.5rem;
+      color: #ffccbc;
+      text-shadow: 0 0 10px rgba(255, 171, 145, 0.8);
+    }
+
+    .class-title {
+      font-size: 2rem;
+      margin-top: 30px;
+      color: #c5e1a5;
+      text-shadow: 0 0 10px rgba(197, 225, 165, 0.7);
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+
+    .result-item {
+      background: linear-gradient(90deg, rgba(41, 128, 185, 0.2) 0%, rgba(52, 152, 219, 0.2) 100%);
+      margin: 15px auto;
+      padding: 15px;
+      width: 85%;
+      max-width: 700px;
+      border-radius: 15px;
+      font-size: 1.6rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: fadeIn 1.2s forwards;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .result-item:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .result-item i {
+      color: #ffd700;
+    }
+
+    .top-ten {
+      margin-top: 60px;
+    }
+
+    .quote {
+      background: linear-gradient(90deg, rgba(230, 126, 34, 0.2) 0%, rgba(211, 84, 0, 0.2) 100%);
+      margin: 25px auto;
+      padding: 18px;
+      width: 80%;
+      max-width: 700px;
+      border-radius: 12px;
+      font-size: 1.6rem;
+      color: #ffecb3;
+      border-right: 4px solid #e67e22;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-style: italic;
+    }
+
+    .credit {
+      margin-top: 60px;
+      font-size: 1.8rem;
+      color: #ffee58;
+      text-shadow: 0 0 10px #fff8dc;
+    }
+
+    @keyframes glow {
+      0% { text-shadow: 0 0 5px #ffd700; }
+      50% { text-shadow: 0 0 25px #ffd700; }
+      100% { text-shadow: 0 0 5px #ffd700; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" style="position: fixed; top: 20px; left: 20px; z-index: 1000; background: rgba(0,0,0,0.7); color: white; padding: 10px 15px; border-radius: 5px; text-decoration: none; display: flex; align-items: center; gap: 8px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(0,0,0,0.9)'" onmouseout="this.style.background='rgba(0,0,0,0.7)'">
+    <i class="fas fa-arrow-right"></i>
+    العودة للرئيسية
+  </a>
+  <audio id="bg-audio" loop>
+    <source src="2026.mp3" type="audio/mpeg">
+    متصفحك لا يدعم تشغيل الصوت.
+  </audio>
+  
+  <div id="audio-controls" style="position: fixed; bottom: 20px; left: 20px; z-index: 1000; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 50%; cursor: pointer; box-shadow: 0 0 15px rgba(255,255,255,0.3);">
+    <i id="audio-icon" class="fas fa-volume-up" style="font-size: 24px; color: #fff;"></i>
+  </div>
+
+  <div class="header">
+    <i class="fas fa-star"></i> نتائج المعدل السنوي – مدرسة العقيد لطفي
+  </div>
+
+  <div class="section-title">المعدلات حسب الأقسام</div>
+  <div id="results"></div>
+
+  <div class="section-title top-ten">أعلى 10 معدلات في المؤسسة</div>
+  <div id="topTen"></div>
+
+  <div class="quote">"من جد وجد، ومن سار على الدرب وصل."</div>
+  <div class="quote">"التفوق ثمرة الجد والاجتهاد، فهنيئًا لكم."</div>
+
+  <div class="credit">برمجة الأستاذ ديقش كمال <i class="fas fa-laptop-code"></i></div>
+
+  <script>
+    const data = {
+      "السنة الأولى 1": [["لعواد فاطمة الزهراء", 9.53], ["شريف بلقاسم", 9.33], ["لعواد آسيا لجين", 9.11]],
+      "السنة الأولى 2": [["توبي هاجر", 9.69], ["مرغاد براءة منية الله", 9.69], ["لعسل شهد", 9.60], ["قرمة علياء رودينة", 9.47]],
+      "السنة الثانية 1": [["شنيط محمد سراج", 9.51], ["العمري عبد الرؤوف", 9.39], ["زنودة مهدي المختار", 9.25]],
+      "السنة الثانية 2": [["شماح زين الدين", 9.73], ["العمري دعاء نور اليقين", 9.67], ["زطيطو زينب", 9.60]],
+      "السنة الثالثة 1": [["سكر يارا", 9.59], ["ضحوي هديل", 9.50], ["كشيدة عبد العزيز", 9.50], ["ساكر مروة", 9.49]],
+      "السنة الثالثة 2": [["خضراوي شعيب ياسين", 9.67], ["ضحوي أسيل مسعودة", 9.55], ["كاسوسي حسين", 9.51]],
+      "السنة الثالثة 3": [["دهان محمد ريان", 9.71], ["جنيدي غفران", 9.65], ["طواقة أسيل", 9.62]],
+      "السنة الرابعة 1": [["دهان عبد الودود", 9.50], ["زنودة سارة", 9.48], ["عزري يعقوب", 9.41]],
+      "السنة الرابعة 2": [["لقويرح أحمد صهيب", 9.79], ["كرفة عبد الرحمان", 9.51], ["غيبوب أيوب", 9.47]],
+      "السنة الخامسة 1": [["طرقي ياسمين", 9.67], ["شرون ندى", 9.65], ["عمير المعتصم بالله", 9.63]],
+      "السنة الخامسة 2": [["شماح ميار", 9.47], ["خضراوي تسنيم", 9.47], ["زنودة لينا", 9.47], ["كشيدة رزان", 9.44], ["بولنوار بهاء الدين", 9.42]]
+    };
+
+    const topTen = [
+      ["المرتبة 1: لقويرح أحمد صهيب", 9.79],
+      ["المرتبة 2: شماح زين الدين", 9.73],
+      ["المرتبة 3: دهان محمد ريان", 9.71],
+      ["المرتبة 4: توبي هاجر", 9.69],
+      ["المرتبة 4: مرغاد براءة منية الله", 9.69],
+      ["المرتبة 5: طرقي ياسمين", 9.67],
+      ["المرتبة 5: خضراوي شعيب ياسين", 9.67],
+      ["المرتبة 5: العمري دعاء نور اليقين", 9.67],
+      ["المرتبة 6: شرون ندى", 9.65],
+      ["المرتبة 6: جنيدي غفران", 9.65],
+      ["المرتبة 7: عمير المعتصم بالله", 9.63],
+      ["المرتبة 8: طواقة أسيل", 9.62],
+      ["المرتبة 9: لعسل شهد", 9.60],
+      ["المرتبة 9: زطيطو زينب", 9.60],
+      ["المرتبة 10: سكر يارا", 9.59]
+    ];
+
+    function displayResults() {
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = '';
+      let delay = 800;
+
+      for (let [className, students] of Object.entries(data)) {
+        const classDiv = document.createElement('div');
+        classDiv.className = 'class-title';
+        classDiv.textContent = className;
+        classDiv.style.animationDelay = `${delay}ms`;
+        resultsDiv.appendChild(classDiv);
+        setTimeout(() => classDiv.scrollIntoView({ behavior: 'smooth', block: 'center' }), delay);
+        delay += 1000;
+
+        for (let [name, avg] of students) {
+          const div = document.createElement('div');
+          div.className = 'result-item';
+          div.innerHTML = `<i class='fas fa-user-graduate'></i> ${name} - ${avg}`;
+          div.style.animationDelay = `${delay}ms`;
+          resultsDiv.appendChild(div);
+          setTimeout(() => div.scrollIntoView({ behavior: 'smooth', block: 'center' }), delay);
+          delay += 1000;
+        }
+      }
+
+      const topTitle = document.createElement('div');
+      topTitle.className = 'section-title top-ten';
+      topTitle.textContent = 'أعلى 10 معدلات في المؤسسة';
+      topTitle.style.animationDelay = `${delay}ms`;
+      resultsDiv.appendChild(topTitle);
+      setTimeout(() => topTitle.scrollIntoView({ behavior: 'smooth', block: 'center' }), delay);
+      delay += 1000;
+
+      for (let [name, avg] of topTen) {
+        const div = document.createElement('div');
+        div.className = 'result-item';
+        div.innerHTML = `<i class='fas fa-crown'></i> ${name} - ${avg}`;
+        div.style.animationDelay = `${delay}ms`;
+        resultsDiv.appendChild(div);
+        setTimeout(() => div.scrollIntoView({ behavior: 'smooth', block: 'center' }), delay);
+        delay += 1000;
+      }
+
+      // انتظار 10 ثوانٍ ثم إعادة العرض
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setTimeout(displayResults, 2000);
+      }, delay + 10000);
+    }
+
+    // دالة بدء الصوت
+    function startAudio() {
+      const audio = document.getElementById('bg-audio');
+      const audioPromise = audio.play();
+      
+      if (audioPromise !== undefined) {
+        audioPromise.catch(error => {
+          // إظهار زر التشغيل في حالة الخطأ
+          document.getElementById('audio-controls').style.display = 'block';
+        });
+      }
+    }
+    
+    // التحكم في الصوت
+    document.getElementById('audio-controls').addEventListener('click', function() {
+      const audio = document.getElementById('bg-audio');
+      const icon = document.getElementById('audio-icon');
+      
+      if (audio.paused) {
+        audio.play();
+        icon.className = 'fas fa-volume-up';
+        this.style.background = 'rgba(0,0,0,0.7)';
+      } else {
+        audio.pause();
+        icon.className = 'fas fa-volume-mute';
+        this.style.background = 'rgba(255,0,0,0.5)';
+      }
+    });
+    
+    // بدء عرض النتائج وتشغيل الصوت عند تحميل الصفحة
+    window.onload = function() {
+      displayResults();
+      // محاولة تشغيل الصوت بعد تأخير بسيط
+      setTimeout(startAudio, 1000);
+      
+      // إضافة تأثيرات إضافية للعناصر
+      document.querySelectorAll('.result-item').forEach((item, index) => {
+        item.style.transition = 'all 0.3s ease';
+        item.style.cursor = 'pointer';
+        item.onmouseover = () => item.style.transform = 'scale(1.02)';
+        item.onmouseout = () => item.style.transform = 'scale(1)';
+      });
+    };
+  </script>
+</body>
+</html>
